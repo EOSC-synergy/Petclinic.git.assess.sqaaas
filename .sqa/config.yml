@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/jaiswaladi246/Petclinic:
+      branch: main
+      repo: https://github.com/jaiswaladi246/Petclinic.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/jaiswaladi246/Petclinic git:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-razzmatazz-beetle.sh
+        container: qc.acc_dorky-chartreuse-akita
+  QC.Doc:
+    repos:
+      github.com/jaiswaladi246/Petclinic find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-flax-forest.sh
+        container: qc.doc_jumpy-platinum-hornet
+      github.com/jaiswaladi246/Petclinic git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-periwinkle-ragdoll.sh
+        container: qc.doc_lanky-khaki-coyote
+      github.com/jaiswaladi246/Petclinic markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-eggplant-okapi.sh
+        container: qc.doc_cheeky-blue-llama
+  QC.Lic:
+    repos:
+      github.com/jaiswaladi246/Petclinic licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cranky-dandelion-bison.sh
+        container: qc.lic_silly-violet-ostrich
+  QC.Sty:
+    repos:
+      github.com/jaiswaladi246/Petclinic checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-brass-tortoise.sh
+        container: qc.sty_scaly-celadon-chicken
+      github.com/jaiswaladi246/Petclinic hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-tangerine-hamster.sh
+        container: qc.sty_scummy-jade-dunker
+  QC.Ver:
+    repos:
+      github.com/jaiswaladi246/Petclinic get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-viridian-wallaby.sh
+        container: qc.ver_silly-taupe-horse
+timeout: 5400
